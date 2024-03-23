@@ -23,13 +23,16 @@ import cv2
 import numpy as np
 
 # A Sample Cost Function
-def value(x):
-    y = 0
-    for i in range(0,len(x)):
-        y = x[i]
+def value(x):     
+    y = x[0]
+    z = x[1]
+    w = x[2]
     print("Valor x: ", x)
     print("valor y: ", y)
-    path = r"D:/Users/chevi/Documents/STITCHING_2007/image_stitching_2/main.py D:/Users/chevi/Documents/imagenes --gain-sigma-n "+str(y)
+    print("valor y: ", z)
+    print("valor y: ", int(w))
+    #PATH 1 ES LA RUTA DONDE SE EJECUTA EL CODIGO DE IMAGE_STITCHING Y LA RUTA DONDE SE ENCUENTRAN LAS FOTOS QUE SE VAN A UTILIZAR 
+    path = r"D:/Users/chevi/Documents/STITCHING_2007/image_stitching_2/main.py D:/Users/chevi/Documents/imagenes --gain-sigma-n "+str(y)+" --mbb-sigma "+str(z)+" --num-bands "+ str(int(w))
     os.system('python '+ path)
     path2 = r"D:/Users/chevi/Documents/imagenes/results"
     files_names = os.listdir(path2)
@@ -117,9 +120,13 @@ def value(x):
 # Define Optimization Problem
 problem = {
         'CostFunction': value, 
-        'nVar': 1, 
-        'VarMin': 1,   # Alternatively you can use a "numpy array" with nVar elements, instead of scalar
-        'VarMax': 255,    # Alternatively you can use a "numpy array" with nVar elements, instead of scalar
+        'nVar': 3, 
+        'VarMin': 1,   # LIMITE MINIMO SIGMA N GAIN COMPENSATION
+        'VarMax': 10, # LIMITE MAXIMO SIGMA N GAIN COMPENSATION
+        #'VarMin2': 2,   # LIMITE MINIMO NUMERO DE BANDAS MULTIBANDBLENDING
+        #'VarMax2': 10,  # LIMITE MAXIMO NUMERO DE BANDAS MULTIBANDBLENDING
+        #'VarMin3': 1,   # LIMITE MINIMO PARA SIGMA DE MULTIBANDBLENDING
+        #'VarMax3': 5,   # LIMITE MAXIMO PARA SIGMA DE MULTIBANDBLENDING
     }
 
 # Running PSO
