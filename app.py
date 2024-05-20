@@ -26,9 +26,9 @@ import pandas as pd
 # A Sample Cost Function
 def value(x):     
     
-    y = x[0]
-    z = x[1]
-    w = x[2]
+    y = round(x[0],8)
+    z = round(x[1],8)
+    w = round(x[2],8)
     
     """
     df = pd.DataFrame(columns=['y_sigma_n','z_mbb_sigma','w_num_bands_mbb','Mean_Value'])

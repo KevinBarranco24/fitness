@@ -3,6 +3,7 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 from tkinter import messagebox
 from fp import Fp
+import pso
 
 
 
@@ -90,12 +91,15 @@ if __name__ == "__main__":
     LB = 1
     UB = 10
     D = 3
-    PopSize= 2
-    MaxT = 3
-
+    PopSize= 3
+    MaxT = 2
+    pso.tic()
     bestfit, bestsol, convergence_curve = GWO(PopSize,MaxT,LB,UB,D,Fun_name)
     print("Best Fitness =", bestfit)
     print("Best Solution = ",bestsol)
+    print()
+    pso.toc()
+    print()
 
 # Show the final result in a message box
     root = tk.Tk()

@@ -6,9 +6,9 @@ import pandas as pd
 class Fp:
     def value(x):     
     
-        y = x[0]
-        z = x[1]
-        w = x[2]
+        y = round(x[0],8)
+        z = round(x[1],8)
+        w = round(x[2],8)
         
         """
         df = pd.DataFrame(columns=['y_sigma_n','z_mbb_sigma','w_num_bands_mbb','Mean_Value'])
@@ -99,6 +99,9 @@ class Fp:
 
         #Mean Value
         Fit = (M_R + M_G + M_B)/3;
+        fit2 = Fit[0]
+        print(Fit)
+        print(fit2)
         data = {'y_sigma_n': [y],'z_mbb_sigma': [z],'w_num_bands_mbb': [w],'Mean_Value': [Fit],'Best_Cost': [0]}
         #df._append({'Mean_Value': Fit},ignore_index=True)
         print("M_R ", M_R)
@@ -120,4 +123,4 @@ class Fp:
             df.to_csv('log_gwo.csv', index=False)
         
 
-        return Fit
+        return fit2
