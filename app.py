@@ -158,7 +158,7 @@ problem = {
 
 pso.tic()
 print('Running PSO ...')
-gbest, pop = pso.PSO(problem, MaxIter = 2, PopSize = 3, c1 = 1.5, c2 = 2, w = 1, wdamp = 0.995)
+gbest, pop = pso.PSO(problem, MaxIter = 200, PopSize = 35, c1 = 1.5, c2 = 2, w = 1, wdamp = 0.995)
 print()
 pso.toc()
 print()

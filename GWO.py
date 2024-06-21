@@ -91,8 +91,8 @@ if __name__ == "__main__":
     LB = 1
     UB = 10
     D = 3
-    PopSize= 3
-    MaxT = 2
+    PopSize= 35
+    MaxT = 200
     pso.tic()
     bestfit, bestsol, convergence_curve = GWO(PopSize,MaxT,LB,UB,D,Fun_name)
     print("Best Fitness =", bestfit)
