@@ -63,6 +63,29 @@ def value(x):
         
         #cv2.waitKey(0)
     #cv2.destroyAllWindows()
+#split con opencv
+        b,g,r = cv2.split(image) 
+        #suma de todos los pixeles
+        #M_B
+        R = np.array(b.shape[0])
+        L = np.array(b.shape[1])
+        CB = 1/(R*L)
+        intenB = cv2.sumElems(b)[0]
+        M_B = CB*intenB
+        #M_G
+        R = np.array(g.shape[0])
+        L = np.array(g.shape[1])
+        CG = 1/(R*L)
+        intenG = cv2.sumElems(g)[0]
+        M_G = CG*intenG
+        #M_R
+        R = np.array(r.shape[0])
+        L = np.array(r.shape[1])
+        CR = 1/(R*L)
+        intenR = cv2.sumElems(r)[0]
+        M_R = CR*intenR
+
+    '''
     result = image.astype(np.uint8)
     I_R = []
     I_G = []
@@ -115,8 +138,8 @@ def value(x):
     for i in range(1,R):
         for j in range(1,L):
             intenB = intenB + I_B[i][j][0]
-    M_B = CB*intenB;
-
+    M_B = CB*intenB;'''
+    
     #Mean Value
     Fit = (M_R + M_G + M_B)/3;
     data = {'y_sigma_n': [y],'z_mbb_sigma': [z],'w_num_bands_mbb': [w],'Mean_Value': [Fit],'Best_Cost': [0]}
@@ -158,7 +181,7 @@ problem = {
 
 pso.tic()
 print('Running PSO ...')
-gbest, pop = pso.PSO(problem, MaxIter = 200, PopSize = 35, c1 = 1.5, c2 = 2, w = 1, wdamp = 0.995)
+gbest, pop = pso.PSO(problem, MaxIter = 2, PopSize = 5, c1 = 1.5, c2 = 2, w = 1, wdamp = 0.995)
 print()
 pso.toc()
 print()

@@ -98,4 +98,4 @@ def rosenbrocks_valley(variables_values = [0,0]):
 
 ##ssa = salp_swarm_algorithm(swarm_size = 15, min_values = [-5,-5], max_values = [5,5], iterations = 200, target_function = rosenbrocks_valley)
 
-ssa = salp_swarm_algorithm(swarm_size = 35, min_values = [-5,-5, 0], max_values = [5,5, 10], iterations = 200, target_function = SsaF.value)
+ssa = salp_swarm_algorithm(swarm_size = 5, min_values = [-5,-5, 0], max_values = [5,5, 10], iterations = 2, target_function = SsaF.value)

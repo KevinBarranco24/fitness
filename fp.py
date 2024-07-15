@@ -43,7 +43,31 @@ class Fp:
             
             #cv2.waitKey(0)
         #cv2.destroyAllWindows()
-        result = image.astype(np.uint8)
+        #split con opencv
+            b,g,r = cv2.split(image) 
+        #suma de todos los pixeles
+            #M_B
+            R = np.array(b.shape[0])
+            L = np.array(b.shape[1])
+            CB = 1/(R*L)
+            intenB = cv2.sumElems(b)[0]
+            M_B = CB*intenB
+            #M_G
+            R = np.array(g.shape[0])
+            L = np.array(g.shape[1])
+            CG = 1/(R*L)
+            intenG = cv2.sumElems(g)[0]
+            M_G = CG*intenG
+            #M_R
+            R = np.array(r.shape[0])
+            L = np.array(r.shape[1])
+            CR = 1/(R*L)
+            intenR = cv2.sumElems(r)[0]
+            M_R = CR*intenR
+
+
+
+        '''result = image.astype(np.uint8)
         I_R = []
         I_G = []
         I_B = []
@@ -96,12 +120,10 @@ class Fp:
             for j in range(1,L):
                 intenB = intenB + I_B[i][j][0]
         M_B = CB*intenB;
-
+'''
         #Mean Value
         Fit = (M_R + M_G + M_B)/3;
-        fit2 = Fit[0]
-        print(Fit)
-        print(fit2)
+        fit2 = Fit
         data = {'y_sigma_n': [y],'z_mbb_sigma': [z],'w_num_bands_mbb': [w],'Mean_Value': [Fit],'Best_Cost': [0]}
         #df._append({'Mean_Value': Fit},ignore_index=True)
         print("M_R ", M_R)
