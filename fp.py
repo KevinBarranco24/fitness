@@ -18,8 +18,8 @@ class Fp:
         """ 
         print("Valor x: ", x)
         print("valor y: ", y)
-        print("valor y: ", z)
-        print("valor y: ", int(w))
+        print("valor z: ", z)
+        print("valor w: ", int(w))
         #PATH 1 ES LA RUTA DONDE SE EJECUTA EL CODIGO DE IMAGE_STITCHING Y LA RUTA DONDE SE ENCUENTRAN LAS FOTOS QUE SE VAN A UTILIZAR 
         path = r"D:/Users/chevi/Documents/STITCHING_2007/image_stitching_2/main.py D:/Users/chevi/Documents/imagenes --gain-sigma-n "+str(y)+" --mbb-sigma "+str(z)+" --num-bands "+ str(int(w))
         os.system('python '+ path)
@@ -124,6 +124,7 @@ class Fp:
         #Mean Value
         Fit = (M_R + M_G + M_B)/3;
         fit2 = Fit
+        '''
         data = {'y_sigma_n': [y],'z_mbb_sigma': [z],'w_num_bands_mbb': [w],'Mean_Value': [Fit],'Best_Cost': [0]}
         #df._append({'Mean_Value': Fit},ignore_index=True)
         print("M_R ", M_R)
@@ -143,6 +144,6 @@ class Fp:
             print(data)
             df = pd.DataFrame(data)
             df.to_csv('log_gwo.csv', index=False)
-        
+        '''
 
         return fit2

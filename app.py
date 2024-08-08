@@ -142,6 +142,7 @@ def value(x):
     
     #Mean Value
     Fit = (M_R + M_G + M_B)/3;
+    '''
     data = {'y_sigma_n': [y],'z_mbb_sigma': [z],'w_num_bands_mbb': [w],'Mean_Value': [Fit],'Best_Cost': [0]}
     #df._append({'Mean_Value': Fit},ignore_index=True)
     print("M_R ", M_R)
@@ -161,7 +162,7 @@ def value(x):
         print(data)
         df = pd.DataFrame(data)
         df.to_csv('log_pso.csv', index=False)
-    
+    '''
 
     return Fit
 
@@ -185,7 +186,7 @@ gbest, pop = pso.PSO(problem, MaxIter = 2, PopSize = 5, c1 = 1.5, c2 = 2, w = 1,
 print()
 pso.toc()
 print()
-
+'''
 data = {'y_sigma_n': [0],'z_mbb_sigma': [0],'w_num_bands_mbb': [0],'Mean_Value': [0],'Best_Cost': [gbest['cost']]}
 df_e = pd.read_csv('log_pso.csv')
 os.remove('log_pso.csv')
@@ -193,7 +194,7 @@ print(data)
 df = pd.DataFrame(data)
 n_df = pd.concat([df_e, df], ignore_index=True)
 n_df.to_csv('log_pso.csv', index=False)
-
+'''
 # Final Result
 print('Global Best:')
 print(gbest)

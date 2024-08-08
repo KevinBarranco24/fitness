@@ -3,9 +3,39 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 from tkinter import messagebox
 from fp import Fp
-import pso
+import os
+import pandas as pd
 
+# Start Time for tic and tov functions
+startTime_for_tictoc = 0
 
+# Start measuring time elapsed
+def tic():
+    import time
+    global startTime_for_tictoc
+    startTime_for_tictoc = time.time()
+
+# End mesuring time elapsed
+def toc():
+    import time, math
+    if 'startTime_for_tictoc' in globals():
+        dt = math.floor(100*(time.time() - startTime_for_tictoc))/100.
+        print('Elapsed time is {} second(s).'.format(dt))
+        data = {'Iteración ': [0], 'Best Cost': [0], 'Values': [0], 'Elapset time (seg)': [dt]}
+        try:
+            df_e = pd.read_csv('best_gwo.csv')
+            os.remove('best_gwo.csv')
+            print(data)
+            df = pd.DataFrame(data)
+            n_df = pd.concat([df_e, df], ignore_index=True)
+            n_df.to_csv('best_gwo.csv', index=False)
+        except:
+            print('Create new DF')
+            print(data)
+            df = pd.DataFrame(data)
+            df.to_csv('best_gwo.csv', index=False)
+    else:
+        print('Start time not set. You should call tic before toc.')
 
 def initialization (PopSize,D,LB,UB):
     SS_Boundary = len(LB) if isinstance(UB,(list,np.ndarray)) else 1
@@ -79,8 +109,23 @@ def GWO(PopSize,MaxT,LB,UB,D,Fobj):
                 X3 = Delta_Pos[j] - A3 * D_Delta
 
                 Positions[i,j] = (X1 + X2 + X3) / 3
+            
         l += 1
         Convergence_curve[l - 1] = Alpha_Fit
+        data = {'Iteración ': [l], 'Best Cost': [Alpha_Fit], 'Values': [Alpha_Pos], 'Elapset time (seg)': [0]}
+        try:
+            df_e = pd.read_csv('best_gwo.csv')
+            os.remove('best_gwo.csv')
+            print(data)
+            df = pd.DataFrame(data)
+            n_df = pd.concat([df_e, df], ignore_index=True)
+            n_df.to_csv('best_gwo.csv', index=False)
+        except:
+            print('Create new DF')
+            print(data)
+            df = pd.DataFrame(data)
+            df.to_csv('best_gwo.csv', index=False)
+        
     return Alpha_Fit, Alpha_Pos, Convergence_curve
 
 if __name__ == "__main__":
@@ -93,12 +138,12 @@ if __name__ == "__main__":
     D = 3
     PopSize= 5
     MaxT = 2
-    pso.tic()
+    tic()
     bestfit, bestsol, convergence_curve = GWO(PopSize,MaxT,LB,UB,D,Fun_name)
     print("Best Fitness =", bestfit)
     print("Best Solution = ",bestsol)
     print()
-    pso.toc()
+    toc()
     print()
 
 # Show the final result in a message box

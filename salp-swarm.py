@@ -16,8 +16,8 @@ import numpy  as np
 import math
 import random
 import os
-from fp import Fp
 from ssa import SsaF
+import pandas as pd
 
 # Function
 def target_function():
@@ -71,7 +71,20 @@ def salp_swarm_algorithm(swarm_size = 5, min_values = [-5,-5], max_values = [5,5
     position = initial_position(swarm_size = swarm_size, min_values = min_values, max_values = max_values, target_function = target_function)
     food     = food_position(dimension = len(min_values), target_function = target_function)
     while (count <= iterations):     
-        print("Iteration = ", count, " f(x) = ", food[0,-1]) 
+        print("Iteration = ", count, " f(x) = ", food[0,-1])
+        data = {'Iteración ': [count], 'Best Cost': [food[0,-1]], 'Values': [position], 'Elapset time (seg)': [0]}
+        try:
+            df_e = pd.read_csv('best_ssa.csv')
+            os.remove('best_ssa.csv')
+            print(data)
+            df = pd.DataFrame(data)
+            n_df = pd.concat([df_e, df], ignore_index=True)
+            n_df.to_csv('best_ssa.csv', index=False)
+        except:
+            print('Create new DF')
+            print(data)
+            df = pd.DataFrame(data)
+            df.to_csv('best_ssa.csv', index=False) 
         c1       = 2*math.exp(-(4*(count/iterations))**2)
         food     = update_food(position, food)        
         position = update_position(position, food, c1 = c1, min_values = min_values, max_values = max_values, target_function = target_function)  
@@ -80,6 +93,39 @@ def salp_swarm_algorithm(swarm_size = 5, min_values = [-5,-5], max_values = [5,5
     return food
 
 ######################## Part 1 - Usage ####################################
+
+# Start Time for tic and tov functions
+startTime_for_tictoc = 0
+
+# Start measuring time elapsed
+def tic():
+    import time
+    global startTime_for_tictoc
+    startTime_for_tictoc = time.time()
+
+# End mesuring time elapsed
+def toc():
+    import time, math
+    if 'startTime_for_tictoc' in globals():
+        dt = math.floor(100*(time.time() - startTime_for_tictoc))/100.
+        print('Elapsed time is {} second(s).'.format(dt))
+        data = {'Iteración ': [0], 'Best Cost': [0], 'Values': [0], 'Elapset time (seg)': [dt]}
+        try:
+            df_e = pd.read_csv('best_ssa.csv')
+            os.remove('best_ssa.csv')
+            print(data)
+            df = pd.DataFrame(data)
+            n_df = pd.concat([df_e, df], ignore_index=True)
+            n_df.to_csv('best_ssa.csv', index=False)
+        except:
+            print('Create new DF')
+            print(data)
+            df = pd.DataFrame(data)
+            df.to_csv('best_ssa.csv', index=False)
+    else:
+        print('Start time not set. You should call tic before toc.')
+
+
 
 # Function to be Minimized (Six Hump Camel Back). Solution ->  f(x1, x2) = -1.0316; x1 = 0.0898, x2 = -0.7126 or x1 = -0.0898, x2 = 0.7126
 def six_hump_camel_back(variables_values = [0, 0]):
@@ -97,5 +143,6 @@ def rosenbrocks_valley(variables_values = [0,0]):
     return func_value
 
 ##ssa = salp_swarm_algorithm(swarm_size = 15, min_values = [-5,-5], max_values = [5,5], iterations = 200, target_function = rosenbrocks_valley)
-
-ssa = salp_swarm_algorithm(swarm_size = 5, min_values = [-5,-5, 0], max_values = [5,5, 10], iterations = 2, target_function = SsaF.value)
+tic()
+ssa = salp_swarm_algorithm(swarm_size = 5, min_values = [1,1, 0], max_values = [5,5, 10], iterations = 2, target_function = SsaF.value)
+toc()

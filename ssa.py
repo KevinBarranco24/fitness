@@ -122,6 +122,7 @@ class SsaF:
         #Mean Value
         Fit = (M_R + M_G + M_B)/3;
         fit2 = Fit
+        '''
         data = {'y_sigma_n': [y],'z_mbb_sigma': [z],'w_num_bands_mbb': [w],'Mean_Value': [Fit],'Best_Cost': [0]}
         #df._append({'Mean_Value': Fit},ignore_index=True)
         print("M_R ", M_R)
@@ -141,6 +142,6 @@ class SsaF:
             print(data)
             df = pd.DataFrame(data)
             df.to_csv('log_ssa.csv', index=False)
-        
+        '''
 
         return fit2

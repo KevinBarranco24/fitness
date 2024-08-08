@@ -80,6 +80,19 @@ def PSO(problem, MaxIter = 100, PopSize = 100, c1 = 1.4962, c2 = 1.4962, w = 0.7
 
         w *= wdamp
         print('Iteration {}: Best Cost = {}'.format(it, gbest['cost']))
+        data = {'Iteración ': [it], 'Best Cost': [gbest['cost']], 'Values': [gbest['position']], 'Elapset time (seg)': [0]}
+        try:
+            df_e = pd.read_csv('best_pso.csv')
+            os.remove('best_pso.csv')
+            print(data)
+            df = pd.DataFrame(data)
+            n_df = pd.concat([df_e, df], ignore_index=True)
+            n_df.to_csv('best_pso.csv', index=False)
+        except:
+            print('Create new DF')
+            print(data)
+            df = pd.DataFrame(data)
+            df.to_csv('best_pso.csv', index=False)
 
     return gbest, pop
 
@@ -98,5 +111,18 @@ def toc():
     if 'startTime_for_tictoc' in globals():
         dt = math.floor(100*(time.time() - startTime_for_tictoc))/100.
         print('Elapsed time is {} second(s).'.format(dt))
+        data = {'Iteración ': [0], 'Best Cost': [0], 'Values': [0], 'Elapset time (seg)': [dt]}
+        try:
+            df_e = pd.read_csv('best_pso.csv')
+            os.remove('best_pso.csv')
+            print(data)
+            df = pd.DataFrame(data)
+            n_df = pd.concat([df_e, df], ignore_index=True)
+            n_df.to_csv('best_pso.csv', index=False)
+        except:
+            print('Create new DF')
+            print(data)
+            df = pd.DataFrame(data)
+            df.to_csv('best_pso.csv', index=False)
     else:
         print('Start time not set. You should call tic before toc.')
