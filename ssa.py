@@ -144,4 +144,7 @@ class SsaF:
             df.to_csv('log_ssa.csv', index=False)
         '''
 
-        return fit2
+        if(fit2 == 0):
+            SsaF.value(x)
+        else:
+            return fit2

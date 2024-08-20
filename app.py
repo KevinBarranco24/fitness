@@ -163,8 +163,10 @@ def value(x):
         df = pd.DataFrame(data)
         df.to_csv('log_pso.csv', index=False)
     '''
-
-    return Fit
+    if(Fit == 0):
+        value(x)
+    else:
+        return Fit
 
 # Define Optimization Problem
 problem = {
@@ -182,7 +184,7 @@ problem = {
 
 pso.tic()
 print('Running PSO ...')
-gbest, pop = pso.PSO(problem, MaxIter = 2, PopSize = 5, c1 = 1.5, c2 = 2, w = 1, wdamp = 0.995)
+gbest, pop = pso.PSO(problem, MaxIter = 5, PopSize = 5, c1 = 1.5, c2 = 2, w = 1, wdamp = 0.995)
 print()
 pso.toc()
 print()
