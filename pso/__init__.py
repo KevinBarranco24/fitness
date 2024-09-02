@@ -49,6 +49,8 @@ def PSO(problem, MaxIter = 100, PopSize = 100, c1 = 1.4962, c2 = 1.4962, w = 0.7
         pop[i]['position'] = np.random.uniform(VarMin, VarMax, nVar)
         pop[i]['velocity'] = np.zeros(nVar)
         pop[i]['cost'] = CostFunction(pop[i]['position'])
+        if(pop[i]['cost'] == 0 or pop[i]['cost'] == None ):
+           pop[i]['cost'] = CostFunction(pop[i]['position']) 
         pop[i]['best_position'] = pop[i]['position'].copy()
         pop[i]['best_cost'] = pop[i]['cost']
         
@@ -69,6 +71,8 @@ def PSO(problem, MaxIter = 100, PopSize = 100, c1 = 1.4962, c2 = 1.4962, w = 0.7
             pop[i]['position'] = np.minimum(pop[i]['position'], VarMax)
 
             pop[i]['cost'] = CostFunction(pop[i]['position'])
+            if(pop[i]['cost'] == 0 or pop[i]['cost'] == None ):
+                pop[i]['cost'] = CostFunction(pop[i]['position']) 
             
             if pop[i]['cost'] < pop[i]['best_cost']:
                 pop[i]['best_position'] = pop[i]['position'].copy()

@@ -163,10 +163,7 @@ def value(x):
         df = pd.DataFrame(data)
         df.to_csv('log_pso.csv', index=False)
     '''
-    if(Fit == 0):
-        value(x)
-    else:
-        return Fit
+    return Fit
 
 # Define Optimization Problem
 problem = {

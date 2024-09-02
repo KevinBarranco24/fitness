@@ -146,7 +146,5 @@ class Fp:
             df.to_csv('log_gwo.csv', index=False)
         '''
 
-        if(fit2 == 0):
-            Fp.value(x)
-        else:
-            return fit2
+       
+        return fit2

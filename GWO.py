@@ -65,6 +65,8 @@ def GWO(PopSize,MaxT,LB,UB,D,Fobj):
             BB_LB = Positions[i,:]<LB
             Positions[i,:] = (Positions[i,:]*(~(BB_UB+BB_LB)))+UB*BB_UB+LB*BB_LB
             Fitness = Fobj(Positions[i,:])
+            if(Fitness == 0 or Fitness == None ):
+                Fitness = Fobj(Positions[i,:])
 
             if Fitness<Alpha_Fit:
                 Alpha_Fit=Fitness
