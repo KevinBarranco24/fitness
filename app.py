@@ -30,20 +30,16 @@ def value(x):
     z = round(x[1],8)
     w = round(x[2],8)
     
-    """
-    df = pd.DataFrame(columns=['y_sigma_n','z_mbb_sigma','w_num_bands_mbb','Mean_Value'])
-    df._append({'y_sigma_n': y},ignore_index=True) 
-    df._append({'y_sigma_n': z},ignore_index=True) 
-    df._append({'y_sigma_n': w},ignore_index=True)
-    """ 
-    print("Valor x: ", x)
-    print("valor y: ", y)
-    print("valor y: ", z)
-    print("valor y: ", int(w))
+    
+    print("Valores_iniciales: ", x)
+    print("Gain_Comp: ", y)
+    print("Grad_Mbb: ", z)
+    print("Num_Bands_Mbb: ", int(w))
+
     #PATH 1 ES LA RUTA DONDE SE EJECUTA EL CODIGO DE IMAGE_STITCHING Y LA RUTA DONDE SE ENCUENTRAN LAS FOTOS QUE SE VAN A UTILIZAR 
-    path = r"D:/Users/chevi/Documents/STITCHING_2007/image_stitching_2/main.py D:/Users/chevi/Documents/imagenes --gain-sigma-n "+str(y)+" --mbb-sigma "+str(z)+" --num-bands "+ str(int(w))
+    path = r"image_stitching\main.py Imagenes --gain-sigma-n "+str(y)+" --mbb-sigma "+str(z)+" --num-bands "+ str(int(w))
     os.system('python '+ path)
-    path2 = r"D:/Users/chevi/Documents/imagenes/results"
+    path2 = r"Imagenes/results"
     files_names = os.listdir(path2)
     for file_name in files_names:
         #print(file_name)

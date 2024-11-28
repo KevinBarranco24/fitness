@@ -67,7 +67,7 @@ def GWO(PopSize,MaxT,LB,UB,D,Fobj):
             Fitness = Fobj(Positions[i,:])
             if(Fitness == 0 or Fitness == None ):
                 Fitness = Fobj(Positions[i,:])
-
+            print("Fitness: ", Fitness)
             if Fitness<Alpha_Fit:
                 Alpha_Fit=Fitness
                 Alpha_Pos=Positions[i,:]
@@ -138,8 +138,8 @@ if __name__ == "__main__":
     LB = 1
     UB = 10
     D = 3
-    PopSize= 5
-    MaxT = 5
+    PopSize= 15
+    MaxT = 10
     tic()
     bestfit, bestsol, convergence_curve = GWO(PopSize,MaxT,LB,UB,D,Fun_name)
     print("Best Fitness =", bestfit)

@@ -72,7 +72,7 @@ def salp_swarm_algorithm(swarm_size = 5, min_values = [-5,-5], max_values = [5,5
     food     = food_position(dimension = len(min_values), target_function = target_function)
     while (count <= iterations):     
         print("Iteration = ", count, " f(x) = ", food[0,-1])
-        data = {'Iteración ': [count], 'Best Cost': [food[0,-1]], 'Values': [position], 'Elapset time (seg)': [0]}
+        data = {'Iteración ': [count], 'Best Cost': [food[0,-1]], 'Elapset time (seg)': [0]}
         try:
             df_e = pd.read_csv('best_ssa.csv')
             os.remove('best_ssa.csv')
@@ -109,7 +109,7 @@ def toc():
     if 'startTime_for_tictoc' in globals():
         dt = math.floor(100*(time.time() - startTime_for_tictoc))/100.
         print('Elapsed time is {} second(s).'.format(dt))
-        data = {'Iteración ': [0], 'Best Cost': [0], 'Values': [0], 'Elapset time (seg)': [dt]}
+        data = {'Iteración ': [0], 'Best Cost': [0], 'Elapset time (seg)': [dt]}
         try:
             df_e = pd.read_csv('best_ssa.csv')
             os.remove('best_ssa.csv')
