@@ -12,7 +12,9 @@ import math
 import random
 import os
 import pandas as pd
-from ssa import SsaF
+#from ssa import SsaF
+#from ssa_entropy import SsaF
+from ssa_gradiente import SsaF
 
 # Function
 def target_function():

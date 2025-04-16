@@ -16,7 +16,9 @@ import numpy  as np
 import math
 import random
 import os
-from ssa import SsaF
+#from ssa import SsaF
+from ssa_entropy import SsaF
+#from ssa_gradiente import SsaF
 import pandas as pd
 
 # Function

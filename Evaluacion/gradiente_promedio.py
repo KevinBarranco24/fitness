@@ -1,35 +1,27 @@
 import cv2
 import numpy as np
 
-# Cargar la imagen (AQUI SE MODIFICA LA RUTA A DONDE SE ENCUENTREN LAS IMAGENES A EVALUAR)
-image = cv2.imread("../Imagenes/results/pano_0.jpg")
+# Cargar la imagen
+image = cv2.imread("../Imagenes/results/pano_0.jpg").astype(np.float32)
 
-# Convertir a flotante para mayor precisión
-image = image.astype(np.float32)
+def calculate_gradient_opencv(channel):
+    # Calcular gradientes con Sobel (más rápido y preciso que np.diff)
+    grad_x = cv2.Sobel(channel, cv2.CV_32F, 1, 0, ksize=1)
+    grad_y = cv2.Sobel(channel, cv2.CV_32F, 0, 1, ksize=1)
 
-
-def calculate_gradient(channel):
-    # Calcular las diferencias en las direcciones horizontal y vertical
-    grad_x = np.diff(channel, axis=1)  # Diferencia horizontal (Resta una columna)
-    grad_y = np.diff(channel, axis=0)  # Diferencia vertical (Resta una fila)
-
-    # Recortar para que las dimensiones coincidan
-    grad_x = grad_x[:-1, :]  # Eliminar última fila para coincidir con grad_y
-    grad_y = grad_y[:, :-1]  # Eliminar última columna para coincidir con grad_x
-
-    # Calcular la magnitud del gradiente
-    grad_magnitude = np.sqrt((grad_x**2 + grad_y**2) / 2)
+    # Magnitud del gradiente
+    grad_magnitude = cv2.magnitude(grad_x, grad_y)
 
     # Promedio del gradiente
-    return np.mean(grad_magnitude)
+    return cv2.mean(grad_magnitude)[0]
 
-# Calcular el gradiente promedio por canal
-gradient_r = calculate_gradient(image[:, :, 2])  # Canal rojo
-gradient_g = calculate_gradient(image[:, :, 1])  # Canal verde
-gradient_b = calculate_gradient(image[:, :, 0])  # Canal azul
+# Calcular gradiente promedio por canal
+gradient_r = calculate_gradient_opencv(image[:, :, 2])  # Canal rojo
+gradient_g = calculate_gradient_opencv(image[:, :, 1])  # Canal verde
+gradient_b = calculate_gradient_opencv(image[:, :, 0])  # Canal azul
 
 # Promedio total
 gradient_avg = (gradient_r + gradient_g + gradient_b) / 3
 
-print(f"Gradiente promedio por canal: R={gradient_r}, G={gradient_g}, B={gradient_b}")
-print(f"Gradiente promedio total: {gradient_avg}")
+print(f"Gradiente promedio por canal: R={gradient_r:.4f}, G={gradient_g:.4f}, B={gradient_b:.4f}")
+print(f"Gradiente promedio total: {gradient_avg:.4f}")

@@ -15,9 +15,9 @@ class SsaF:
         print("Num_Bands_Mbb: ", int(w))
 
         #PATH 1 ES LA RUTA DONDE SE EJECUTA EL CODIGO DE IMAGE_STITCHING Y LA RUTA DONDE SE ENCUENTRAN LAS FOTOS QUE SE VAN A UTILIZAR 
-        path = r"image_stitching\main.py Imagenes --gain-sigma-n "+str(y)+" --mbb-sigma "+str(z)+" --num-bands "+ str(int(w))
+        path = r"image_stitching\main.py Imagenes/EDIFICIO_Z --gain-sigma-n "+str(y)+" --mbb-sigma "+str(z)+" --num-bands "+ str(int(w))
         os.system('python '+ path)
-        path2 = r"Imagenes/results"
+        path2 = r"Imagenes/EDIFICIO_Z/results"
         files_names = os.listdir(path2)
         for file_name in files_names:
             #print(file_name)

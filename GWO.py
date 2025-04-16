@@ -2,7 +2,9 @@ import numpy as np
 import tkinter as tk
 import matplotlib.pyplot as plt
 from tkinter import messagebox
-from fp import Fp
+#from fp import Fp
+#from fp_entropy import Fp
+from fp_gradiente import Fp
 import os
 import pandas as pd
 
@@ -138,8 +140,8 @@ if __name__ == "__main__":
     LB = 1
     UB = 10
     D = 3
-    PopSize= 15
-    MaxT = 10
+    PopSize= 5
+    MaxT = 5
     tic()
     bestfit, bestsol, convergence_curve = GWO(PopSize,MaxT,LB,UB,D,Fun_name)
     print("Best Fitness =", bestfit)
